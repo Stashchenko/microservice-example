@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+option go_package = "github.com/samverrall/microservice-example/pkg/proto";
+import "google/protobuf/timestamp.proto";
+
+
+message SignUpRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message SignupResponse {
+  string user_id = 1;
+}
+
+message GetUserRequest {
+  int64 user_id = 1;
+}
+
+message GetUserResponse {
+  int64 user_id = 1;
+  string email = 2;
+  google.protobuf.Timestamp created_at = 3;
+}
+
+service User {
+  rpc Signup(SignUpRequest) returns (SignupResponse);
+  rpc GetUser(GetUserRequest) returns (GetUserResponse);
+}
